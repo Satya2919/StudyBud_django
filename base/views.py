@@ -5,8 +5,8 @@ from django.http import HttpResponse
 
 rooms = [
     {'id':1, 'name': 'Lets learn python'},
-    {'id':1, 'name': 'Design my webpage'},
-    {'id':1, 'name': 'C++ learning'}
+    {'id':2, 'name': 'Design my webpage'},
+    {'id':3, 'name': 'C++ learning'}
 ]
 
 def home(request):
@@ -15,4 +15,9 @@ def home(request):
 
 
 def room(request, pk):
-    return render(request, 'base/room.html')
+    room = None
+    for i in rooms:
+        if i['id'] == int(pk):
+            room=i
+    context = {'room': room}
+    return render(request, 'base/room.html', context)
